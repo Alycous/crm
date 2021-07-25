@@ -1,3 +1,6 @@
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.Set" %>
+<%@ page import="java.util.Iterator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
@@ -22,6 +25,7 @@
             src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="jquery/bs_typeahead/bootstrap3-typeahead.min.js"></script>
     <script type="text/javascript">
+
         $(function () {
             //日历插件
             $(".time1").datetimepicker({
@@ -82,9 +86,30 @@
                 //关闭模态窗口
                 $("#findMarketActivity").modal("hide");
             })
+            //stage and posibility
+            $("#create-transactionStage").change(function () {
+                var stage = $("#create-transactionStage").val();
+                $("#create-possibility").val(json[stage]);
+
+            })
 
 
-        })
+        });
+
+        var json ={
+            <%
+            Map<String,String> pMap = (Map<String, String>) application.getAttribute("pMap");
+            Set<String> set = pMap.keySet();
+            Iterator<String> it = set.iterator();
+            while (it.hasNext()){
+                String stage = it.next();
+                String possibility = pMap.get(stage);
+            %>
+                "<%=stage%>":<%=possibility%>,
+            <%
+            }
+            %>
+        };
 
         function flush() {
             $.ajax({

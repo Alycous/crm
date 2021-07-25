@@ -8,9 +8,7 @@ import com.bjpowernode.crm.utils.ServiceFactory;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class SysInitListener implements ServletContextListener {
 
@@ -25,14 +23,23 @@ public class SysInitListener implements ServletContextListener {
         // map  codetype,dicvaluelist
         ServletContext application = event.getServletContext();
         Set<String> set = map.keySet();
-        for (String s : set){
-            application.setAttribute(s,map.get(s));
+        for (String s : set) {
+            application.setAttribute(s, map.get(s));
         }
-
-
-
-
         System.out.println("服务器缓存数据字典加载结束");
+
+        System.out.println("stage可能性数据加载中...");
+
+        ResourceBundle bundle = ResourceBundle.getBundle("Stage2Possibility");
+        Enumeration<String> keys = bundle.getKeys();
+        Map<String,String> pMap = new HashMap<>();
+        while (keys.hasMoreElements()){
+            String key = keys.nextElement();
+            String value = bundle.getString(key);
+            pMap.put(key,value);
+        }
+        application.setAttribute("pMap",pMap);
+        System.out.println("stage可能性数据加载完毕！！！");
 
     }
 }
