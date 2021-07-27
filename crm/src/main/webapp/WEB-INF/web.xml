@@ -84,6 +84,11 @@
     <servlet-name>TranController</servlet-name>
     <url-pattern>/workbench/transaction/getUserList.do</url-pattern>
     <url-pattern>/workbench/transaction/getCustomerName.do</url-pattern>
+    <url-pattern>/workbench/transaction/save.do</url-pattern>
+    <url-pattern>/workbench/transaction/detail.do</url-pattern>
+    <url-pattern>/workbench/transaction/getHistorysByTranId.do</url-pattern>
+    <url-pattern>/workbench/transaction/changeStage.do</url-pattern>
+    <url-pattern>/workbench/transaction/getCharts.do</url-pattern>
   </servlet-mapping>
 
   

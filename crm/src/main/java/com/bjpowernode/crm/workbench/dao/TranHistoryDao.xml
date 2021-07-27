@@ -26,7 +26,9 @@
             #{tranId}
         )
     </insert>
-  	
+  	<select id="getHistorysByTranId" resultType="com.bjpowernode.crm.workbench.domain.TranHistory">
+        select * from tbl_tran_history where tranId=#{tranId}
+    </select>
 </mapper>
 
 
